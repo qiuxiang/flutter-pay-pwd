@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pay_password/pay_password.dart';
 
 void main() {
   runApp(App());
@@ -20,9 +21,25 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Flutter demo')),
-      body: const Center(
-        child: Text('Hello'),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            payPassword(
+              context: context,
+              hintText: 'Buy Goods',
+              amount: '199.99',
+              onSubmit: (password) async {
+                await Future.delayed(const Duration(seconds: 1));
+                if (password != '000000') {
+                  return 'Password Incorrect';
+                }
+                ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Payment Successful')));
+              },
+            );
+          },
+          child: const Text('Pay'),
+        ),
       ),
     );
   }

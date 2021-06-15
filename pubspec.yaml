@@ -10,6 +10,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  pinput: ^1.2.0
+  get: ^4.1.4
 
 dev_dependencies:
   flutter_test:
