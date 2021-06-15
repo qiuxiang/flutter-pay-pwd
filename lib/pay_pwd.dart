@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pinput/pin_put/pin_put.dart';
 
-Future<void> payPassword({
+Future<void> pay({
   required BuildContext context,
   required FutureOr<String?> Function(String password) onSubmit,
   String title = '',
@@ -14,7 +14,7 @@ Future<void> payPassword({
   Widget? content,
 }) async {
   final controller = TextEditingController();
-  final state = _PayPasswordState();
+  final state = _PayState();
   Get.put(state);
   await showDialog(
     barrierDismissible: false,
@@ -126,7 +126,7 @@ Future<void> payPassword({
   );
 }
 
-class _PayPasswordState extends GetxController {
+class _PayState extends GetxController {
   final loading = false.obs;
   final error = ''.obs;
 }

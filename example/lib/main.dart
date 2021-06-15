@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pay_password/pay_password.dart';
+import 'package:pay_pwd/pay_pwd.dart';
 
 void main() {
   runApp(App());
@@ -24,7 +24,7 @@ class HomePage extends StatelessWidget {
       body: Center(
         child: ElevatedButton(
           onPressed: () {
-            payPassword(
+            pay(
               context: context,
               hintText: 'Buy Goods',
               amount: '199.99',

@@ -1,3 +1,3 @@
-# pay_password
+# pay_pwd
 
-6 digital pay password input.
+6 digital payment password input.

@@ -10,7 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
-  pay_password:
+  pay_pwd:
     path: ..
 
 dev_dependencies:
