@@ -34,7 +34,7 @@ class HomePage extends StatelessWidget {
                   return 'Password Incorrect';
                 }
                 ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Payment Successful')));
+                    const SnackBar(content: Text('Successful')));
               },
             );
           },
