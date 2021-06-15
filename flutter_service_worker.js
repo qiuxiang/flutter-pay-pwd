@@ -14,8 +14,8 @@ const RESOURCES = {
 "assets/FontManifest.json": "dc3d03800ccca4601324923c0b1d6d57",
 "favicon.png": "5dcef449791fa27946b3d35ad8803796",
 "main.dart.js": "75c286939348690dffcfbf252f842698",
-"index.html": "88f6f825d5b6bcf6c55c43b2c92a08af",
-"/": "88f6f825d5b6bcf6c55c43b2c92a08af"
+"index.html": "e5053c12feb7a272e7f3c30a7311484d",
+"/": "e5053c12feb7a272e7f3c30a7311484d"
 };
 
 // The application shell files that are downloaded before a service worker can
