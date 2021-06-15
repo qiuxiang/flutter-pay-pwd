@@ -1,0 +1,16 @@
+name: pay_password
+description: 6 digital pay password input
+version: 0.0.1
+homepage: https://github.com/qiuxiang/flutter-pay-password
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
