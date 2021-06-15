@@ -10,7 +10,7 @@ Future<void> payPassword({
   String title = '',
   String hintText = '',
   String amount = '',
-  String currency = '￥',
+  String currency = '\$',
   Widget? content,
 }) async {
   final controller = TextEditingController();
