@@ -13,7 +13,7 @@ Future<void> pay({
   String currency = '\$',
   Widget? content,
 }) async {
-  final controller = TextEditingController();
+  final input = TextEditingController();
   final state = _PayState();
   Get.put(state);
   await showDialog(
@@ -38,18 +38,12 @@ Future<void> pay({
             ),
           ),
         ]),
-        content: Column(mainAxisSize: MainAxisSize.min, children: [
-          Visibility(
-            visible: hintText.isNotEmpty,
-            child: Padding(
-              padding: const EdgeInsets.only(top: 8),
-              child: Text(hintText),
-            ),
-          ),
-          Visibility(
-            visible: amount.isNotEmpty,
-            child: Padding(
-              padding: const EdgeInsets.only(top: 8),
+        content: SizedBox(
+          width: 240,
+          child: Column(mainAxisSize: MainAxisSize.min, children: [
+            Visibility(visible: hintText.isNotEmpty, child: Text(hintText)),
+            Visibility(
+              visible: amount.isNotEmpty,
               child: Row(mainAxisSize: MainAxisSize.min, children: [
                 Text(
                   currency,
@@ -67,60 +61,61 @@ Future<void> pay({
                 ),
               ]),
             ),
-          ),
-          content ?? const SizedBox(),
-          const SizedBox(height: 24),
-          Obx(() {
-            return PinPut(
-              fieldsCount: 6,
-              obscureText: '•',
-              controller: controller,
-              autofocus: true,
-              enabled: state.loading.isFalse,
-              submittedFieldDecoration: decoration,
-              selectedFieldDecoration: decoration,
-              followingFieldDecoration: decoration,
-              disabledDecoration: decoration,
-              eachFieldMargin: const EdgeInsets.all(4),
-              onSubmit: (password) async {
-                state.loading.value = true;
-                final error = await onSubmit(password);
-                if (error == null || error.isEmpty) {
-                  Navigator.of(context).pop();
-                } else {
-                  state.error.value = error;
-                  state.loading.value = false;
-                  controller.clear();
-                }
-              },
-            );
-          }),
-          Obx(() {
-            if (state.loading.isTrue) {
-              return const Padding(
-                padding: EdgeInsets.only(top: 12),
-                child: SizedBox(
+            content ?? const SizedBox(),
+            const SizedBox(height: 24),
+            LayoutBuilder(builder: (context, box) {
+              final width = (box.maxWidth - 6 * 5) / 6;
+              return Obx(() {
+                return PinPut(
+                  fieldsCount: 6,
+                  obscureText: '•',
+                  controller: input,
+                  autofocus: true,
+                  enabled: state.loading.isFalse,
+                  eachFieldConstraints:
+                      BoxConstraints(minHeight: width, minWidth: width),
+                  submittedFieldDecoration: decoration,
+                  selectedFieldDecoration: decoration,
+                  followingFieldDecoration: decoration,
+                  disabledDecoration: decoration,
+                  onSubmit: (password) async {
+                    state.loading.value = true;
+                    final error = await onSubmit(password);
+                    if (error == null || error.isEmpty) {
+                      Navigator.of(context).pop();
+                    } else {
+                      state.error.value = error;
+                      state.loading.value = false;
+                      input.clear();
+                    }
+                  },
+                );
+              });
+            }),
+            Obx(() {
+              if (state.loading.isTrue) {
+                return const SizedBox(
                   width: 24,
                   height: 24,
                   child: CircularProgressIndicator(strokeWidth: 2),
-                ),
-              );
-            }
+                );
+              }
 
-            if (state.error.isNotEmpty) {
-              return Container(
-                height: 36,
-                alignment: Alignment.bottomCenter,
-                child: Text(
-                  state.error.value,
-                  style: TextStyle(color: context.theme.errorColor),
-                ),
-              );
-            }
+              if (state.error.isNotEmpty) {
+                return Container(
+                  height: 24,
+                  alignment: Alignment.bottomCenter,
+                  child: Text(
+                    state.error.value,
+                    style: TextStyle(color: context.theme.errorColor),
+                  ),
+                );
+              }
 
-            return const SizedBox();
-          }),
-        ]),
+              return const SizedBox();
+            }),
+          ]),
+        ),
       );
     },
   );
